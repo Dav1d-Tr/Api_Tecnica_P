@@ -1,0 +1,31 @@
+PARA PRODUCCION
+
+El Quick Tunnel sirve para pruebas: entrega una URL aleatoria *.trycloudflare.com
+y cambia al reiniciar.
+
+Para una URL estable como:
+https://planos-api.tudominio.com
+
+usa un Named/Remotely Managed Cloudflare Tunnel:
+
+1. Crea/agrega tu dominio a Cloudflare.
+2. En Cloudflare: Networking > Tunnels > Create Tunnel.
+3. Crea una ruta pública para planos-api.tudominio.com hacia:
+   http://localhost:8091
+4. Instala cloudflared en Windows.
+5. Cloudflare te da un comando de instalación con un TUNNEL_TOKEN.
+6. Instálalo como servicio para que inicie con Windows.
+
+Cloudflare documenta que los tunnels hacen conexiones salientes y no requieren
+puertos de entrada públicos. Para Windows, cloudflared puede instalarse como
+servicio del sistema.
+
+SEGURIDAD
+
+El API exige:
+Authorization: Bearer <API_KEY>
+
+No publiques la API sin autenticación.
+
+Cuando lo conectemos a un GPT Action, la autenticación de la acción puede usar
+API Key tipo Bearer, y el esquema OpenAPI definirá los endpoints que puede usar.

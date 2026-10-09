@@ -1,0 +1,5 @@
+fastapi
+uvicorn[standard]
+pypdf
+httpx
+mcp>=2,<3
